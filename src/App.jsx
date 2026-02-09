@@ -10,7 +10,7 @@ const App = () => {
   const [loading, setLoading] = useState(false);
 
   // API 
-  const RAPID_API_KEY = 'df7731359bmshb630a09d99d5636p16ef25jsn8f8ea03d45b3';
+  const RAPID_API_KEY = 'f080da95d1msh093447944bd78a1p189cd3jsn975cfef9d532';
   const RAPID_API_HOST = 'free-google-translator.p.rapidapi.com';
 
   const handleTranslate = async () => {
@@ -30,7 +30,6 @@ const App = () => {
         'x-rapidapi-host': RAPID_API_HOST,
         'Content-Type': 'application/json'
       },
-      
       data: {
         translate: 'rapidapi'
       }
@@ -39,7 +38,6 @@ const App = () => {
     try {
       const response = await axios.request(options);
       console.log("Full API Response:", response.data);
-
       const result = response.data.translation || "Translation not found";
       setTranslatedText(result);
     } catch (error) {
@@ -59,111 +57,126 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center py-12 px-4">
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-8">
-        <Languages className="text-blue-600 w-10 h-10" />
-        <h1 className="text-3xl font-bold text-gray-800">Armaan's Text Translator</h1>
-      </div>
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 font-sans antialiased selection:bg-blue-100">
+      <div className="max-w-5xl mx-auto px-4 py-12">
+        
+        {/* Header */}
+        <header className="text-center mb-10">
+          <div className="inline-flex items-center justify-center p-3 bg-blue-600 rounded-2xl shadow-lg shadow-blue-200 mb-4">
+            <Languages className="text-white w-8 h-8" />
+          </div>
+          <h1 className="text-4xl font-extrabold tracking-tight text-slate-800">
+            Ayesha's <span className="text-blue-600">Translator</span>
+          </h1>
+          <p className="text-slate-500 mt-2 font-medium">Simple. Fast. Accurate.</p>
+        </header>
 
-      <div className="w-full max-w-4xl bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
-        {/* Language Selection Bar */}
-        <div className="flex items-center justify-between p-4 border-b bg-gray-50">
-          <select 
-            className="bg-transparent font-medium text-gray-700 outline-none cursor-pointer p-2"
-            value={sourceLang}
-            onChange={(e) => setSourceLang(e.target.value)}
-          >
-            <option value="en">English</option>
-            <option value="hi">Hindi</option>
-            <option value="mr">Marathi</option>
-            <option value="ur">Urdu</option>
-            <option value="ja">Japanese</option>
-          </select>
-
-          <button 
-            onClick={swapLanguages}
-            className="p-2 hover:bg-gray-200 rounded-full transition-colors mx-2"
-            title="Swap Languages"
-          >
-            <ArrowRightLeft className="w-5 h-5 text-gray-500" />
-          </button>
-
-          <select 
-            className="bg-transparent font-medium text-gray-700 outline-none cursor-pointer p-2 text-right"
-            value={targetLang}
-            onChange={(e) => setTargetLang(e.target.value)}
-          >
-            <option value="hi">Hindi</option>
-            <option value="en">English</option>
-            <option value="mr">Marathi</option>
-            <option value="ur">Urdu</option>
-            <option value="ja">Japanese</option>
-          </select>
-        </div>
-
-        {/* Text Areas */}
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Input Area */}
-          <div className="p-6 border-b md:border-b-0 md:border-r border-gray-200">
-            <textarea
-              className="w-full h-48 text-xl resize-none outline-none text-gray-800 placeholder-gray-400"
-              placeholder="Enter text to translate..."
-              value={sourceText}
-              onChange={(e) => setSourceText(e.target.value)}
-            />
-            <div className="flex justify-between items-center mt-4 border-t pt-4">
-              <span className="text-sm text-gray-400 font-medium">
-                {sourceText.length} characters
-              </span>
-              <button 
-                onClick={() => setSourceText('')}
-                className="text-gray-400 hover:text-red-500 transition-colors"
-                title="Clear text"
+        <main className="bg-white rounded-3xl shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden">
+          
+          {/* Controls Bar */}
+          <div className="flex items-center justify-between px-8 py-5 bg-slate-50/50 border-b border-slate-100">
+            <div className="flex items-center gap-4 w-full">
+              <select 
+                className="bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm font-semibold text-slate-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all cursor-pointer shadow-sm"
+                value={sourceLang}
+                onChange={(e) => setSourceLang(e.target.value)}
               >
-                <Trash2 className="w-5 h-5" />
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+                <option value="mr">Marathi</option>
+                <option value="ur">Urdu</option>
+                <option value="ja">Japanese</option>
+              </select>
+
+              <button 
+                onClick={swapLanguages}
+                className="p-2 hover:bg-blue-50 hover:text-blue-600 text-slate-400 rounded-full transition-all duration-200 border border-transparent hover:border-blue-100 shadow-sm bg-white"
+                title="Swap Languages"
+              >
+                <ArrowRightLeft className="w-4 h-4" />
               </button>
+
+              <select 
+                className="bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm font-semibold text-slate-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all cursor-pointer shadow-sm"
+                value={targetLang}
+                onChange={(e) => setTargetLang(e.target.value)}
+              >
+                <option value="hi">Hindi</option>
+                <option value="en">English</option>
+                <option value="mr">Marathi</option>
+                <option value="ur">Urdu</option>
+                <option value="ja">Japanese</option>
+              </select>
             </div>
           </div>
 
-          {/* Output Area */}
-          <div className="p-6 bg-gray-50/50">
-            <div className="w-full h-48 text-xl text-gray-800 break-words overflow-auto">
-              {loading ? (
-                <div className="flex items-center gap-2 text-blue-500 font-medium">
-                  <Loader2 className="animate-spin w-5 h-5" />
-                  Translating...
-                </div>
-              ) : (
-                translatedText || <span className="text-gray-300">Translation will appear here</span>
-              )}
+          {/* Translation Workspace */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
+            
+            {/* Input Side */}
+            <div className="p-8">
+              <textarea
+                className="w-full h-64 text-xl resize-none outline-none text-slate-800 placeholder-slate-300 font-medium leading-relaxed bg-transparent"
+                placeholder="Type something here..."
+                value={sourceText}
+                onChange={(e) => setSourceText(e.target.value)}
+              />
+              <div className="flex justify-between items-center mt-6 pt-4 border-t border-slate-50">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  {sourceText.length} Characters
+                </span>
+                <button 
+                  onClick={() => setSourceText('')}
+                  className="p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                  title="Clear"
+                >
+                  <Trash2 className="w-5 h-5" />
+                </button>
+              </div>
             </div>
-            <div className="flex justify-end mt-4 border-t pt-4">
-              <button 
-                disabled={!translatedText}
-                onClick={() => {
-                    navigator.clipboard.writeText(translatedText);
-                    alert("Copied to clipboard!");
-                }}
-                className="text-gray-400 hover:text-blue-600 disabled:opacity-30 transition-colors"
-                title="Copy Translation"
-              >
-                <Copy className="w-5 h-5" />
-              </button>
+
+            {/* Output Side */}
+            <div className="p-8 bg-slate-50/30">
+              <div className="w-full h-64 text-xl text-slate-800 font-medium leading-relaxed overflow-auto">
+                {loading ? (
+                  <div className="flex flex-col items-center justify-center h-full gap-3 text-blue-500">
+                    <Loader2 className="animate-spin w-8 h-8" />
+                    <span className="text-sm font-bold uppercase tracking-widest">Translating</span>
+                  </div>
+                ) : (
+                  translatedText || <span className="text-slate-300 italic">Your translation will appear here...</span>
+                )}
+              </div>
+              <div className="flex justify-end mt-6 pt-4 border-t border-slate-50">
+                <button 
+                  disabled={!translatedText}
+                  onClick={() => {
+                      navigator.clipboard.writeText(translatedText);
+                      alert("Copied to clipboard!");
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg disabled:opacity-20 transition-all font-semibold text-sm"
+                >
+                  <Copy className="w-4 h-4" />
+                  Copy Result
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Action Button */}
-        <div className="p-6 bg-white border-t flex justify-center">
-          <button
-            onClick={handleTranslate}
-            disabled={loading || !sourceText}
-            className="bg-blue-600 text-white px-10 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all disabled:bg-blue-300 shadow-lg active:scale-95"
-          >
-            Translate Now
-          </button>
-        </div>
+          {/* Footer */}
+          <div className="p-8 bg-white border-t border-slate-50 flex justify-center">
+            <button
+              onClick={handleTranslate}
+              disabled={loading || !sourceText}
+              className="group relative inline-flex items-center justify-center px-12 py-4 font-bold text-white transition-all duration-200 bg-blue-600 font-pj rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 shadow-xl shadow-blue-200 disabled:shadow-none active:scale-95"
+            >
+              Translate Now
+            </button>
+          </div>
+        </main>
+        
+        <footer className="mt-8 text-center text-slate-400 text-xs font-medium uppercase tracking-widest">
+        </footer>
       </div>
     </div>
   );
